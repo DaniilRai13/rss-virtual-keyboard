@@ -31,6 +31,48 @@ let keyboardLines = [
         ['', "]"],
         ['/', '&#92;'],
         ['','DEL']
+    ],
+    [
+        ['', 'Caps Lock'],
+        ['', 'A'],
+        ['', 'S'],
+        ['', 'D'],
+        ['', 'F'],
+        ['', 'G'],
+        ['', 'H'],
+        ['', 'J'],
+        ['', 'K'],
+        ['', 'L'],
+        ['', ';'],
+        ['', "'"],
+        ['', "ENTER"]
+    ],
+    [
+        ['', 'Shift'],
+        ['',"&#92;"],
+        ['', 'Z'],
+        ['', 'X'],
+        ['', 'C'],
+        ['', 'V'],
+        ['', 'B'],
+        ['', 'N'],
+        ['', 'M'],
+        ['', '.'],
+        ['', ','],
+        ['', '/'],
+        ['', "&#129045;"],
+        ['', "SHIFT"]
+    ],
+    [
+        ['', 'Ctrl'],
+        ['',"Win"],
+        ['', 'Alt'],
+        ['', ' '],
+        ['', 'Alt'],
+        ['', 'Ctr'],
+        ['', '&#129044;'],
+        ['', '&#129047;'],
+        ['', '&#129046;']
     ]
 ]
 
@@ -60,7 +102,33 @@ function generateKeyBoard() {
         out = ""
         console.log(line)
         keyboard.append(line)
-        
+        keyboard.querySelectorAll(".key").forEach(item=>{
+            if(item.querySelector(".main").textContent == "Backspace"){
+                item.classList.add("spacial_btn")
+            }
+            if(item.querySelector(".main").textContent == "Shift"){
+                item.classList.add("spacial_btn")
+            }
+            if(item.querySelector(".main").textContent == "SHIFT"){
+                item.style.paddingLeft = 0
+                item.style.paddingRight = 0
+            }
+            if(item.querySelector(".main").textContent == "DEL"){
+                item.classList.add("spacial_btn")
+            }
+            if(item.querySelector(".main").textContent == "Caps Lock"){
+                item.classList.add("spacial_btn")
+            }
+            if(item.querySelector(".main").textContent == "ENTER"){
+                item.classList.add("spacial_btn")
+            }
+            if(item.querySelector(".main").textContent == " "){
+                item.classList.add("spacial_btn")
+            }
+            if(item.querySelector(".main").textContent == ("&#129044;" ||"&#129045;"||"&#129046;"||"&#129047;")){
+                item.classList.add("spacial_btn")
+            }
+        })
 })
 }
 createMainArea()
