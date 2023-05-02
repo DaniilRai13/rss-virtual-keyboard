@@ -139,8 +139,9 @@ function generateKeyBoard() {
                 item.classList.add("spacial_btn")
                 item.classList.add("caps_lock")
             }
-            if (item.querySelector(".main").textContent == "ENTER") {
+            if (item.querySelector(".main").textContent == "Enter") {
                 item.classList.add("spacial_btn")
+                item.classList.add("enter")
             }
             if (item.querySelector(".main").textContent == " ") {
                 item.classList.add("spacial_btn")
@@ -262,10 +263,12 @@ document.addEventListener("keyup", (e) => {
     console.log(e)
 })
 
+let textarea = document.querySelector(".textarea")
+keys.forEach(item=>{
+    item.addEventListener('click', ()=>{
+        if(item.classList.length == 1){
+            textarea.value += item.querySelector(".main").getAttribute('lowerkey')
+        }
+    })
+})
 
-// class KeyBoard{
-//     constructor(){
-
-//     }
-
-// }
