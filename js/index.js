@@ -106,34 +106,38 @@ function generateKeyBoard() {
             if (item.querySelector(".main").textContent == "Backspace") {
                 item.classList.add("spacial_btn")
             }
-            if (item.querySelector(".main").textContent == "Ctrl" && item.querySelector(".small").textContent=='') {
-                
+            if (item.querySelector(".main").textContent == "Tab") {
+                item.classList.add("spacial_btn")
+                item.classList.add("tab")
+            }
+            if (item.querySelector(".main").textContent == "Ctrl" && item.querySelector(".small").textContent == '') {
                 item.classList.add("left_ctrl")
             }
-            if (item.querySelector(".main").textContent == "Ctrl" && item.querySelector(".small").textContent==' ') {
-                
+            if (item.querySelector(".main").textContent == "Ctrl" && item.querySelector(".small").textContent == ' ') {
                 item.classList.add("right_ctrl")
             }
-            if (item.querySelector(".main").textContent == "Alt" && item.querySelector(".small").textContent=='') {
-                
+            if (item.querySelector(".main").textContent == "Alt" && item.querySelector(".small").textContent == '') {
                 item.classList.add("left_alt")
             }
-            if (item.querySelector(".main").textContent == "Alt" && item.querySelector(".small").textContent==' ') {
-                
+            if (item.querySelector(".main").textContent == "Alt" && item.querySelector(".small").textContent == ' ') {
                 item.classList.add("right_alt")
             }
             if (item.querySelector(".main").textContent == "Shift") {
                 item.classList.add("spacial_btn")
+                item.classList.add("shift_left")
             }
             if (item.querySelector(".main").textContent == "SHIFT") {
                 item.style.paddingLeft = 0
                 item.style.paddingRight = 0
+                item.classList.add("shift_right")
             }
             if (item.querySelector(".main").textContent == "DEL") {
                 item.classList.add("spacial_btn")
+                item.classList.add("del")
             }
             if (item.querySelector(".main").textContent == "Caps Lock") {
                 item.classList.add("spacial_btn")
+                item.classList.add("caps_lock")
             }
             if (item.querySelector(".main").textContent == "ENTER") {
                 item.classList.add("spacial_btn")
@@ -143,6 +147,10 @@ function generateKeyBoard() {
             }
             if (item.querySelector(".main").textContent == ("&#129044;" || "&#129045;" || "&#129046;" || "&#129047;")) {
                 item.classList.add("spacial_btn")
+            }
+            if (item.querySelector(".main").innerHTML === "&#129044;") {
+                console.log(12)
+                item.classList.add("left_arrow")
             }
         })
     })
@@ -163,47 +171,98 @@ document.addEventListener("keydown", (e) => {
         if (e.key == keys_main[i].getAttribute('keyName') || e.key == keys_main[i].getAttribute('lowerKey')) {
             keys[i].classList.add("active")
         }
-        if(e.code == "ControlLeft"){
+        if (e.code == "ControlLeft") {
             document.querySelector(".right_ctrl").classList.remove("active")
             document.querySelector(".left_ctrl").classList.add("active")
         }
-        if(e.code == "ControlRight"){
+        if (e.code == "ControlRight") {
             document.querySelector(".left_ctrl").classList.remove("active")
             document.querySelector(".right_ctrl").classList.add("active")
         }
-        if(e.code == "AltLeft"){
+        if (e.code == "AltLeft") {
             document.querySelector(".right_alt").classList.remove("active")
             document.querySelector(".left_alt").classList.add("active")
         }
-        if(e.code == "AltRight"){
+        if (e.code == "AltRight") {
             document.querySelector(".left_alt").classList.remove("active")
             document.querySelector(".right_alt").classList.add("active")
+        }
+        if (e.code == "NumpadDecimal") {
+            document.querySelector(".del").classList.add("active")
+        }
+        if (e.code == "CapsLock") {
+            document.querySelector(".caps_lock").classList.add("active")
+        }
+        if (e.code == "Tab") {
+            e.preventDefault()
+            document.querySelector(".tab").classList.add("active")
+        }
+        if (e.code == "ShiftRight") {
+            document.querySelector(".shift_left").classList.remove("active")
+            document.querySelector(".shift_right").classList.add("active")
+        }
+        if (e.code == "ShiftLeft") {
+            e.preventDefault()
+            document.querySelector(".shift_right").classList.remove("active")
+            document.querySelector(".shift_left").classList.add("active")
+        }
+        if (e.code == "ArrowLeft") {
+            e.preventDefault()
+            document.querySelector(".left_arrow").classList.add("active")
         }
     }
     console.log(e)
 })
+
 document.addEventListener("keyup", (e) => {
     for (let i = 0; i < keys.length; i++) {
         if (e.key == keys_main[i].getAttribute('keyName') || e.key == keys_main[i].getAttribute('lowerKey')) {
             keys[i].classList.remove("active")
         }
-        if(e.code == "ControlLeft"){
+        if (e.code == "ControlLeft") {
             document.querySelector(".left_ctrl").classList.remove("active")
         }
-        if(e.code == "ControlRight"){
+        if (e.code == "ControlRight") {
             document.querySelector(".right_ctrl").classList.remove("active")
         }
-        if(e.code == "AltLeft"){
+        if (e.code == "AltLeft") {
             e.preventDefault()
             document.querySelector(".left_alt").classList.remove("active")
         }
-        if(e.code == "AltRight"){
+        if (e.code == "AltRight") {
             e.preventDefault()
             document.querySelector(".right_alt").classList.remove("active")
+        }
+        if (e.code == "Tab") {
+            e.preventDefault()
+            document.querySelector(".tab").classList.remove("active")
+        }
+        if (e.code == "NumpadDecimal") {
+            document.querySelector(".del").classList.remove("active")
+        }
+        if (e.code == "CapsLock") {
+            e.preventDefault()
+            document.querySelector(".caps_lock").classList.remove("active")
+        }
+        if (e.code == "Tab") {
+            e.preventDefault()
+            document.querySelector(".tab").classList.remove("active")
+        }
+        if (e.code == "ShiftRight") {
+            document.querySelector(".shift_right").classList.remove("active")
+        }
+        if (e.code == "ShiftLeft") {
+            document.querySelector(".shift_left").classList.remove("active")
+        }
+        if (e.code == "ArrowLeft") {
+            e.preventDefault()
+            document.querySelector(".left_arrow").classList.remove("active")
         }
     }
     console.log(e)
 })
+
+
 // class KeyBoard{
 //     constructor(){
 
