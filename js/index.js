@@ -271,7 +271,7 @@ let btnAnimation = (item) => {
         setTimeout(() => {
             item.classList.add("animation_press_remove")
             resolve(item)
-        }, 900)
+        }, 300)
     })
     .then((item) => {
         item.classList.remove("animation_press")
