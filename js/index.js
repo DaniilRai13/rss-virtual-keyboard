@@ -262,27 +262,34 @@ let textarea = document.querySelector(".textarea")
 let backspace = document.querySelector(".backspace")
 let space = document.querySelector(".space_btn")
 let enter = document.querySelector(".enter")
-
+let del = document.querySelector(".del")
 let spellArr = []
+
+let btnAnimation = (item) => {
+    return new Promise((resolve, reject) => {
+        item.classList.add("animation_press")
+        setTimeout(() => {
+            item.classList.add("animation_press_remove")
+            resolve(item)
+        }, 900)
+    })
+    .then((item) => {
+        item.classList.remove("animation_press")
+        item.classList.remove("animation_press_remove")
+    })
+}
 
 keys.forEach(item => {
     item.addEventListener('click', () => {
         if (item.classList.length == 1 && caps_state == true) {
             textarea.value += item.querySelector(".main").getAttribute('keyName')
             spellArr.push(item.querySelector(".main").getAttribute('keyName'))
-            item.classList.add("animation_press")
-            item.classList.add("animation_press")
-            setTimeout(() => {
-                item.classList.remove("animation_press")
-            }, 500)
+            btnAnimation(item)
         }
         else if (item.classList.length == 1) {
             textarea.value += item.querySelector(".main").getAttribute('lowerkey')
             spellArr.push(item.querySelector(".main").getAttribute('lowerkey'))
-            item.classList.add("animation_press")
-            setTimeout(() => {
-                item.classList.remove("animation_press")
-            }, 400)
+            btnAnimation(item)
         }
         console.log(spellArr)
     })
@@ -310,4 +317,8 @@ space.addEventListener("click", () => {
 
 enter.addEventListener("click", () => {
 
+})
+del.addEventListener("click", () => {
+    spellArr = []
+    textarea.value = ''
 })
