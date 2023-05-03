@@ -60,7 +60,7 @@ let keyboardLines = [
         ['', '.'],
         ['', ','],
         ['', '/'],
-        ['', "&#129045;"],
+        ['.', "&#129045;"],
         ['', "SHIFT"]
     ],
     [
@@ -70,9 +70,9 @@ let keyboardLines = [
         ['', ' '],
         [' ', 'Alt'],
         [' ', 'Ctrl'],
-        ['', '&#129044;'],
-        ['', '&#129047;'],
-        ['', '&#129046;']
+        ['.', '&#129044;'],
+        ['.', '&#129047;'],
+        ['.', '&#129046;']
     ]
 ]
 
@@ -105,6 +105,7 @@ function generateKeyBoard() {
         keyboard.querySelectorAll(".key").forEach(item => {
             if (item.querySelector(".main").textContent == "Backspace") {
                 item.classList.add("spacial_btn")
+                item.classList.add("backspace")
             }
             if (item.querySelector(".main").textContent == "Tab") {
                 item.classList.add("spacial_btn")
@@ -145,13 +146,10 @@ function generateKeyBoard() {
             }
             if (item.querySelector(".main").textContent == " ") {
                 item.classList.add("spacial_btn")
+                item.classList.add("space_btn")
             }
             if (item.querySelector(".main").textContent == ("&#129044;" || "&#129045;" || "&#129046;" || "&#129047;")) {
                 item.classList.add("spacial_btn")
-            }
-            if (item.querySelector(".main").innerHTML === "&#129044;") {
-                console.log(12)
-                item.classList.add("left_arrow")
             }
         })
     })
@@ -161,6 +159,8 @@ generateKeyBoard()
 
 let keys = document.querySelectorAll(".key")
 let keys_main = document.querySelectorAll(".main")
+let caps_lock = document.querySelector(".caps_lock")
+let caps_state = false
 
 for (let i = 0; i < keys.length; i++) {
     keys_main[i].setAttribute('keyName', keys_main[i].textContent)
@@ -172,45 +172,43 @@ document.addEventListener("keydown", (e) => {
         if (e.key == keys_main[i].getAttribute('keyName') || e.key == keys_main[i].getAttribute('lowerKey')) {
             keys[i].classList.add("active")
         }
-        if (e.code == "ControlLeft") {
-            document.querySelector(".right_ctrl").classList.remove("active")
-            document.querySelector(".left_ctrl").classList.add("active")
-        }
-        if (e.code == "ControlRight") {
-            document.querySelector(".left_ctrl").classList.remove("active")
-            document.querySelector(".right_ctrl").classList.add("active")
-        }
-        if (e.code == "AltLeft") {
-            document.querySelector(".right_alt").classList.remove("active")
-            document.querySelector(".left_alt").classList.add("active")
-        }
-        if (e.code == "AltRight") {
-            document.querySelector(".left_alt").classList.remove("active")
-            document.querySelector(".right_alt").classList.add("active")
-        }
-        if (e.code == "NumpadDecimal") {
-            document.querySelector(".del").classList.add("active")
-        }
-        if (e.code == "CapsLock") {
-            document.querySelector(".caps_lock").classList.add("active")
-        }
-        if (e.code == "Tab") {
-            e.preventDefault()
-            document.querySelector(".tab").classList.add("active")
-        }
-        if (e.code == "ShiftRight") {
-            document.querySelector(".shift_left").classList.remove("active")
-            document.querySelector(".shift_right").classList.add("active")
-        }
-        if (e.code == "ShiftLeft") {
-            e.preventDefault()
-            document.querySelector(".shift_right").classList.remove("active")
-            document.querySelector(".shift_left").classList.add("active")
-        }
-        if (e.code == "ArrowLeft") {
-            e.preventDefault()
-            document.querySelector(".left_arrow").classList.add("active")
-        }
+    }
+    if (e.code == "ControlLeft") {
+        document.querySelector(".right_ctrl").classList.remove("active")
+        document.querySelector(".left_ctrl").classList.add("active")
+    }
+    if (e.code == "ControlRight") {
+        document.querySelector(".left_ctrl").classList.remove("active")
+        document.querySelector(".right_ctrl").classList.add("active")
+    }
+    if (e.code == "AltLeft") {
+        document.querySelector(".right_alt").classList.remove("active")
+        document.querySelector(".left_alt").classList.add("active")
+    }
+    if (e.code == "AltRight") {
+        document.querySelector(".left_alt").classList.remove("active")
+        document.querySelector(".right_alt").classList.add("active")
+    }
+    if (e.code == "NumpadDecimal") {
+        document.querySelector(".del").classList.add("active")
+    }
+
+    if (e.code == "Tab") {
+        e.preventDefault()
+        document.querySelector(".tab").classList.add("active")
+    }
+    if (e.code == "ShiftRight") {
+        document.querySelector(".shift_left").classList.remove("active")
+        document.querySelector(".shift_right").classList.add("active")
+    }
+    if (e.code == "ShiftLeft") {
+        e.preventDefault()
+        document.querySelector(".shift_right").classList.remove("active")
+        document.querySelector(".shift_left").classList.add("active")
+    }
+    if (e.code == "ArrowLeft") {
+        e.preventDefault()
+        document.querySelector(".left_arrow").classList.add("active")
     }
     console.log(e)
 })
@@ -220,55 +218,96 @@ document.addEventListener("keyup", (e) => {
         if (e.key == keys_main[i].getAttribute('keyName') || e.key == keys_main[i].getAttribute('lowerKey')) {
             keys[i].classList.remove("active")
         }
-        if (e.code == "ControlLeft") {
-            document.querySelector(".left_ctrl").classList.remove("active")
-        }
-        if (e.code == "ControlRight") {
-            document.querySelector(".right_ctrl").classList.remove("active")
-        }
-        if (e.code == "AltLeft") {
-            e.preventDefault()
-            document.querySelector(".left_alt").classList.remove("active")
-        }
-        if (e.code == "AltRight") {
-            e.preventDefault()
-            document.querySelector(".right_alt").classList.remove("active")
-        }
-        if (e.code == "Tab") {
-            e.preventDefault()
-            document.querySelector(".tab").classList.remove("active")
-        }
-        if (e.code == "NumpadDecimal") {
-            document.querySelector(".del").classList.remove("active")
-        }
-        if (e.code == "CapsLock") {
-            e.preventDefault()
-            document.querySelector(".caps_lock").classList.remove("active")
-        }
-        if (e.code == "Tab") {
-            e.preventDefault()
-            document.querySelector(".tab").classList.remove("active")
-        }
-        if (e.code == "ShiftRight") {
-            document.querySelector(".shift_right").classList.remove("active")
-        }
-        if (e.code == "ShiftLeft") {
-            document.querySelector(".shift_left").classList.remove("active")
-        }
-        if (e.code == "ArrowLeft") {
-            e.preventDefault()
-            document.querySelector(".left_arrow").classList.remove("active")
-        }
     }
+    if (e.getModifierState("CapsLock")) {
+        caps_lock.classList.add("active")
+        caps_state = true
+    } else {
+        caps_lock.classList.remove("active")
+        caps_state = false
+    }
+    if (e.code == "ControlLeft") {
+        document.querySelector(".left_ctrl").classList.remove("active")
+    }
+    if (e.code == "ControlRight") {
+        document.querySelector(".right_ctrl").classList.remove("active")
+    }
+    if (e.code == "AltLeft") {
+        e.preventDefault()
+        document.querySelector(".left_alt").classList.remove("active")
+    }
+    if (e.code == "AltRight") {
+        e.preventDefault()
+        document.querySelector(".right_alt").classList.remove("active")
+    }
+    if (e.code == "Tab") {
+        e.preventDefault()
+        document.querySelector(".tab").classList.remove("active")
+    }
+    if (e.code == "NumpadDecimal") {
+        document.querySelector(".del").classList.remove("active")
+    }
+    if (e.code == "ShiftRight") {
+        document.querySelector(".shift_right").classList.remove("active")
+    }
+
+    if (e.code == "ShiftLeft") {
+        document.querySelector(".shift_left").classList.remove("active")
+    }
+
     console.log(e)
 })
 
 let textarea = document.querySelector(".textarea")
-keys.forEach(item=>{
-    item.addEventListener('click', ()=>{
-        if(item.classList.length == 1){
-            textarea.value += item.querySelector(".main").getAttribute('lowerkey')
+let backspace = document.querySelector(".backspace")
+let space = document.querySelector(".space_btn")
+let enter = document.querySelector(".enter")
+
+let spellArr = []
+
+keys.forEach(item => {
+    item.addEventListener('click', () => {
+        if (item.classList.length == 1 && caps_state == true) {
+            textarea.value += item.querySelector(".main").getAttribute('keyName')
+            spellArr.push(item.querySelector(".main").getAttribute('keyName'))
+            item.classList.add("animation_press")
+            item.classList.add("animation_press")
+            setTimeout(() => {
+                item.classList.remove("animation_press")
+            }, 500)
         }
+        else if (item.classList.length == 1) {
+            textarea.value += item.querySelector(".main").getAttribute('lowerkey')
+            spellArr.push(item.querySelector(".main").getAttribute('lowerkey'))
+            item.classList.add("animation_press")
+            setTimeout(() => {
+                item.classList.remove("animation_press")
+            }, 400)
+        }
+        console.log(spellArr)
     })
 })
 
+caps_lock.addEventListener("click", () => {
+    if (caps_state == true) {
+        caps_lock.classList.remove("active")
+        caps_state = false
+    } else {
+        caps_lock.classList.add("active")
+        caps_state = true
+    }
+})
+
+backspace.addEventListener("click", () => {
+    spellArr.pop()
+    textarea.value = spellArr.join('')
+})
+
+space.addEventListener("click", () => {
+    spellArr.push(" ")
+    textarea.value += `</br>`
+})
+
+enter.addEventListener("click", () => {
+
+})
