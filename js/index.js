@@ -75,7 +75,11 @@ let keyboardLines = [
         ['.', '&#129046;']
     ]
 ]
-
+class Keyboard{
+    constructor(){
+        
+    }
+}
 
 function createMainArea() {
     let container = document.createElement("div")
@@ -86,6 +90,7 @@ function createMainArea() {
     `)
     document.body.prepend(container)
 }
+
 function generateKeyBoard() {
     let keyboard = document.querySelector(".keyboard")
     let out = ''
