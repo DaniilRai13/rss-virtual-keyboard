@@ -75,6 +75,7 @@ let keyboardLines = [
         ['.', '&#129046;']
     ]
 ]
+
 class Keyboard{
     constructor(){
         
@@ -270,6 +271,11 @@ let enter = document.querySelector(".enter")
 let del = document.querySelector(".del")
 let spellArr = []
 
+enter.addEventListener("click",(e)=>{
+    textarea.value += "\n"
+    spellArr.push("\n")
+})
+
 let btnAnimation = (item) => {
     return new Promise((resolve, reject) => {
         item.classList.add("animation_press")
@@ -320,9 +326,6 @@ space.addEventListener("click", () => {
     textarea.value += `</br>`
 })
 
-enter.addEventListener("click", () => {
-
-})
 del.addEventListener("click", () => {
     spellArr = []
     textarea.value = ''
